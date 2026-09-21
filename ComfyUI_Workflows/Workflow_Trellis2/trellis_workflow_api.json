@@ -1,0 +1,179 @@
+{
+  "2": {
+    "inputs": {
+      "image": "generated_sdxl (6).png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "3": {
+    "inputs": {
+      "low_vram": true,
+      "image": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "Trellis2RemoveBackground",
+    "_meta": {
+      "title": "TRELLIS.2 Remove Background"
+    }
+  },
+  "4": {
+    "inputs": {
+      "resolution": "512",
+      "precision": "auto",
+      "attn_backend": "auto"
+    },
+    "class_type": "LoadTrellis2Models",
+    "_meta": {
+      "title": "(Down)Load TRELLIS.2 Models"
+    }
+  },
+  "5": {
+    "inputs": {
+      "background_color": "black",
+      "model_config": [
+        "4",
+        0
+      ],
+      "image": [
+        "3",
+        0
+      ],
+      "mask": [
+        "3",
+        1
+      ]
+    },
+    "class_type": "Trellis2GetConditioning",
+    "_meta": {
+      "title": "TRELLIS.2 Get Conditioning"
+    }
+  },
+  "7": {
+    "inputs": {
+      "seed": 965577757,
+      "ss_guidance_strength": 6.5,
+      "ss_guidance_rescale": 0.05,
+      "ss_sampling_steps": 12,
+      "shape_guidance_strength": 6.5,
+      "shape_guidance_rescale": 0.05,
+      "shape_sampling_steps": 7,
+      "max_tokens": 24576,
+      "model_config": [
+        "4",
+        0
+      ],
+      "conditioning": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "Trellis2ImageToShape",
+    "_meta": {
+      "title": "TRELLIS.2 Image to Shape"
+    }
+  },
+  "10": {
+    "inputs": {
+      "filename_prefix": "Trellis_Results",
+      "file_format": "glb",
+      "trimesh": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "Trellis2ExportTrimesh",
+    "_meta": {
+      "title": "TRELLIS.2 Export Trimesh"
+    }
+  },
+  "11": {
+    "inputs": {
+      "seed": 1469412091,
+      "tex_guidance_strength": 3,
+      "tex_guidance_rescale": 0.2,
+      "tex_sampling_steps": 8,
+      "model_config": [
+        "4",
+        0
+      ],
+      "conditioning": [
+        "5",
+        0
+      ],
+      "shape_slat": [
+        "7",
+        1
+      ],
+      "subs": [
+        "7",
+        2
+      ]
+    },
+    "class_type": "Trellis2ShapeToTexturedMesh",
+    "_meta": {
+      "title": "TRELLIS.2 Shape to Textured Mesh"
+    }
+  },
+  "12": {
+    "inputs": {
+      "remesh": "on",
+      "remesh.remesh_band": 1,
+      "remesh.remove_inner_faces": true,
+      "target_face_count": 5000,
+      "floater_threshold": 0.001,
+      "weld_vertices": true,
+      "weld_digits": 4,
+      "chart_cone_angle": 90,
+      "chart_refine_iterations": 0,
+      "chart_global_iterations": 1,
+      "chart_smooth_strength": 1,
+      "trimesh": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "Trellis2ProcessMesh",
+    "_meta": {
+      "title": "TRELLIS.2 Process Mesh"
+    }
+  },
+  "13": {
+    "inputs": {
+      "texture_size": 1024,
+      "trimesh": [
+        "12",
+        0
+      ],
+      "voxelgrid": [
+        "11",
+        0
+      ],
+      "original_mesh": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "Trellis2RasterizePBR",
+    "_meta": {
+      "title": "TRELLIS.2 Rasterize PBR"
+    }
+  },
+  "15": {
+    "inputs": {
+      "model_file": [
+        "10",
+        0
+      ],
+      "image": ""
+    },
+    "class_type": "Preview3D",
+    "_meta": {
+      "title": "Preview 3D & Animation"
+    }
+  }
+}
