@@ -6,6 +6,8 @@ Pipeline per trasformare uno sketch in un'immagine 2D e, successivamente, in un 
 
 Questa cartella contiene i due server Flask, i workflow ComfyUI e immagini di esempio. I servizi possono essere provati tramite le rispettive API; il server 2D include anche una pagina web di prova.
 
+Per installare il progetto su un altro computer, seguire [REPRODUCIBILITY.md](REPRODUCIBILITY.md). La guida distingue il software presente qui dai modelli e nodi esterni che devono ancora essere installati.
+
 L'esecuzione descritta nel progetto usa due ambienti: il workflow 2D sul server universitario e il workflow TRELLIS.2 su un computer locale. `127.0.0.1` indica sempre la macchina su cui gira il processo che lo usa.
 
 ## Contenuto
@@ -17,6 +19,9 @@ L'esecuzione descritta nel progetto usa due ambienti: il workflow 2D sul server 
 | `ComfyUI_Workflows/Workflow_SDXL/sdxl_scribble_workflow.json` | Rappresentazione API del workflow SDXL; lo script 2D costruisce comunque il workflow direttamente nel codice. |
 | `ComfyUI_Workflows/Workflow_Trellis2/trellis_workflow_api.json` | Workflow API usato dal bridge 3D. |
 | `Immagini_esempio/` | Sketch e risultati raccolti durante le prove; i nomi dei file non rappresentano una classificazione automatica dei risultati. |
+| `requirements-server.txt` | Dipendenze Python dirette dei due server Flask; non include le dipendenze di ComfyUI. |
+| `scripts/check_setup.py` | Controllo preliminare dei nodi e dei checkpoint visibili a ComfyUI. |
+| `REPRODUCIBILITY.md` | Guida per preparare i due ambienti ed eseguire un test completo. |
 
 ## Requisiti
 
@@ -35,7 +40,7 @@ Dalla cartella principale della repository, in PowerShell:
 ```powershell
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
-python -m pip install flask requests ollama opencv-python numpy
+python -m pip install -r requirements-server.txt
 ```
 
 Per usare Ollama nella modalita di prompt augmentation, avviare anche il servizio Ollama e rendere disponibile il modello `llama3.1`. Se il servizio non risponde, lo script 2D ripiega sul template testuale fisso. Si puo evitare la chiamata al modello passando `"magic_enrich": false` nella richiesta.
@@ -72,7 +77,7 @@ La sequenza API e la seguente:
 2. `GET /jobs/<job_id>` per controllare l'avanzamento. Attendere `status: "success"` oppure leggere il messaggio in caso di `status: "error"`.
 3. `GET /download/<job_id>` per scaricare il file GLB una volta completato il job.
 
-Il workflow contiene la rimozione dello sfondo, il condizionamento dall'immagine, la generazione della forma e della mesh texturizzata, il trattamento della mesh, la rasterizzazione PBR e l'esportazione GLB. Nel JSON incluso sono impostati `target_face_count: 5000` e `texture_size: 1024`; modificarli nel workflow API se si desidera un'altra configurazione. I seed dei nodi TRELLIS.2 sono configurati con randomizzazione dopo la generazione.
+Il workflow contiene la rimozione dello sfondo, il condizionamento dall'immagine, la generazione della forma e della mesh texturizzata, il trattamento della mesh, la rasterizzazione PBR e l'esportazione GLB. Nel JSON incluso sono impostati `target_face_count: 5000` e `texture_size: 1024`; modificarli nel workflow API se si desidera un'altra configurazione. Il JSON API contiene valori di seed espliciti; la randomizzazione osservata nell'interfaccia grafica non e documentata dal file API.
 
 ## Prima della pubblicazione
 
