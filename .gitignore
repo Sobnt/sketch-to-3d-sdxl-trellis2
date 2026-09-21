@@ -11,3 +11,23 @@ trellis_bridge_outputs/
 *.pt
 *.pth
 *.gguf
+
+# Unity project stored in Unity/ (keep Assets/, Packages/, ProjectSettings/, and .meta files).
+/Unity/[Ll]ibrary/
+/Unity/[Tt]emp/
+/Unity/[Oo]bj/
+/Unity/[Bb]uild/
+/Unity/[Bb]uilds/
+/Unity/[Ll]ogs/
+/Unity/[Uu]ser[Ss]ettings/
+/Unity/[Mm]emoryCaptures/
+/Unity/[Rr]ecordings/
+/Unity/.vs/
+/Unity/.gradle/
+/Unity/*.csproj
+/Unity/*.sln
+/Unity/*.slnx
+/Unity/*.unityproj
+/Unity/*.userprefs
+/Unity/*.apk
+/Unity/*.aab
