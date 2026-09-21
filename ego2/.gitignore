@@ -1,0 +1,50 @@
+# Unity generated
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+
+# IDE / Visual Studio
+.vs/
+.idea/
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+
+# Unity generated files
+sysinfo.txt
+*.pidb.meta
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Crash reports
+sysinfo.txt
+
+# Rider
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# Build output
+/Build/
+/Builds/
+
+# User-specific
+*.user
+*.userprefs
+UpgradeLog.htm

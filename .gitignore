@@ -31,3 +31,23 @@ trellis_bridge_outputs/
 /Unity/*.userprefs
 /Unity/*.apk
 /Unity/*.aab
+
+# Unity generated files inside ego2
+ego2/[Ll]ibrary/
+ego2/[Tt]emp/
+ego2/[Oo]bj/
+ego2/[Bb]uild/
+ego2/[Bb]uilds/
+ego2/[Ll]ogs/
+ego2/[Uu]ser[Ss]ettings/
+
+# Unity generated IDE files
+ego2/*.csproj
+ego2/*.sln
+ego2/*.suo
+ego2/*.user
+ego2/*.userprefs
+ego2/.vs/
+
+# Unity upgrade generated file
+ego2/UpgradeLog.htm
