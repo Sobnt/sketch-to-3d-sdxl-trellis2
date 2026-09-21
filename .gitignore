@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+trellis_bridge_outputs/
+*.blend1
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.gguf
