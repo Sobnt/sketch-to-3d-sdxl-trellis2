@@ -1,0 +1,92 @@
+{
+  "1": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "sdxl-base-1.0.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": ["1", 1],
+      "text": "A high-quality product photograph of a chair, isolated on a pure solid white background, clean studio lighting, sharp focus, no shadows, no reflections, single object, product photography style"
+    }
+  },
+  "5": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": ["1", 1],
+      "text": "background, colored background, gradient background, patterned background, textured background, geometric background, wallpaper, environment, scenery, landscape, dark background, busy background, colorful background, abstract background, bokeh, blurry, low quality, distorted, deformed, text, watermark, multiple objects, extra limbs, ugly, disfigured, shadow, reflection, floor, surface, table"
+    }
+  },
+  "6": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "example.png",
+      "upload": "image"
+    }
+  },
+  "7": {
+    "class_type": "AIO_Preprocessor",
+    "inputs": {
+      "image": ["6", 0],
+      "preprocessor": "ScribblePreprocessor",
+      "resolution": 1024
+    }
+  },
+  "8": {
+    "class_type": "ControlNetLoader",
+    "inputs": {
+      "control_net_name": "sdxl_scribble_controlnet.safetensors"
+    }
+  },
+  "9": {
+    "class_type": "ControlNetApplyAdvanced",
+    "inputs": {
+      "positive": ["4", 0],
+      "negative": ["5", 0],
+      "control_net": ["8", 0],
+      "image": ["7", 0],
+      "strength": 0.85,
+      "start_percent": 0.0,
+      "end_percent": 0.9
+    }
+  },
+  "10": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    }
+  },
+  "11": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": ["1", 0],
+      "positive": ["9", 0],
+      "negative": ["9", 1],
+      "latent_image": ["10", 0],
+      "seed": 42,
+      "steps": 20,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    }
+  },
+  "12": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": ["11", 0],
+      "vae": ["1", 2]
+    }
+  },
+  "13": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": ["12", 0],
+      "filename_prefix": "flask_sdxl_output"
+    }
+  }
+}
