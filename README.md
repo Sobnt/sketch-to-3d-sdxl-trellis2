@@ -79,9 +79,3 @@ La sequenza API e la seguente:
 
 Il workflow contiene la rimozione dello sfondo, il condizionamento dall'immagine, la generazione della forma e della mesh texturizzata, il trattamento della mesh, la rasterizzazione PBR e l'esportazione GLB. Nel JSON incluso sono impostati `target_face_count: 5000` e `texture_size: 1024`; modificarli nel workflow API se si desidera un'altra configurazione. Il JSON API contiene valori di seed espliciti; la randomizzazione osservata nell'interfaccia grafica non e documentata dal file API.
 
-## Prima della pubblicazione
-
-- Verificare che immagini di esempio e altri materiali inclusi possano essere redistribuiti; indicare la provenienza degli esempi non originali.
-- Non aggiungere credenziali, indirizzi privati, ambienti virtuali, checkpoint, output generati o file di backup del progetto.
-- Aggiungere un file `LICENSE` solo dopo aver scelto le condizioni di distribuzione del codice; le licenze dei modelli e dei nodi esterni restano separate.
-- Eseguire almeno una prova completa dei due servizi nell'ambiente di destinazione e annotare versioni e nodi effettivamente usati.
